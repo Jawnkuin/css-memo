@@ -151,7 +151,7 @@ But percentage value for ```height``` is still calculated with respect to the co
 
 
 auto高度
---- 
+---
 如果正常流元素设置height:auto，显示时其高度将恰好足以包含其内联内容(包括文本)的行盒。
 
 高度为auto时，会在段落上设置一个边框，并认为没有内边距
@@ -167,7 +167,7 @@ auto高度
 ---
 垂直相邻元素合并
 
-*horizontal margins never collapse
+*horizontal margins never collapse*
 
 上下```li```之间的距离是```2em```而不是```1em+2em```
 ```
@@ -256,7 +256,7 @@ em:在font-size中定义,用来包裹字
 
 内容区:非替换元素是em串在一起的框 替换元素是元素的固有高度再加上margin border padding
 
-行间距:line-height - font-size 
+行间距:line-height - font-size
 
 行内框: 非替换元素==line-height 替换元素==内容区高度
 
@@ -273,5 +273,86 @@ em:在font-size中定义,用来包裹字
 
 >**行内格式化**
 
-line-height 对block元素高度没有直接影响，但是会简介影响内部的inline元素
+line-height 对block元素高度没有直接影响，但是会简介影响内部的inline内容
+
+如果没有内容,即使设置了line-height也不会有高度
+
+```
+<p style="line-height: 1em;background:#669966"></p>
+```
+<p style="line-height: 1em;background:#669966"></p>
+
+行内非替换元素
+---
+根元素设置line-height为缩放因子,比如1.25
+
+子元素line-height尽量使用em单位,避免上下行重叠的情况出现
+
+行内元素的边框由font-size而不是line-height决定,因为```边框包裹内容区```
+
+给行内非替换元素增加背景,且设置了padding属性,可能因为绘制顺序
+
+背景压盖上一行内容
+
+行内替换元素
+---
+替换元素高度(自有高度,padding,margin,border)会改变行框的高度,
+
+但不会改变line-height.
+
+可以设置```display:block```防止改变行高
+
+
+>**元素显示(display)**
+
+```<a/>```设置为block来形成侧边导航栏
+
+```<li></li>```设置为iniline形成横向列表
+
+inline-block 行内块
+---
+
+行内快相当于一个行内替换元素
+
+```
+<style>
+div.ib{margin:1em 0;width:200px; border: 1px solid;}
+div.ib p{border: 1px dotted}
+div.ib#one p{display:block;width:6em;text-align:center;}
+div.ib#two p{display:inline;width:6em;text-align:center;}
+div.ib#three p{display:inline-block;width:6em;text-align:center;}
+</style>
+
+<div class="ib" id="one">
+Lorem ipsum dolor sit amet <p>Lorem ipsum dolor</p> Lorem ipsum dolor sit amet
+</div>
+
+<div class="ib" id="two">
+Lorem ipsum dolor sit amet <p>Lorem ipsum dolor</p> Lorem ipsum dolor sit amet
+</div>
+
+<div class="ib" id="three">
+Lorem ipsum dolor sit amet <p>Lorem ipsum dolor</p> Lorem ipsum dolor sit amet
+</div>
+```
+<style>
+div.ib{margin:1em 0;width:200px; border: 1px solid;}
+div.ib p{border: 1px dotted}
+div.ib#one p{display:block;width:6em;text-align:center;}
+div.ib#two p{display:inline;width:6em;text-align:center;}
+div.ib#three p{display:inline-block;width:6em;text-align:center;}
+</style>
+
+<div class="ib" id="one">
+Lorem ipsum dolor sit amet <p>Lorem ipsum dolor</p> Lorem ipsum dolor sit amet
+</div>
+
+<div class="ib" id="two">
+Lorem ipsum dolor sit amet <p>Lorem ipsum dolor</p> Lorem ipsum dolor sit amet
+</div>
+
+<div class="ib" id="three">
+Lorem ipsum dolor sit amet <p>Lorem ipsum dolor</p> Lorem ipsum dolor sit amet
+</div>
+
 
